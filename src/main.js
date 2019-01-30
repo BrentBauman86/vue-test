@@ -1,16 +1,16 @@
 import Vue from 'vue';
-import VueMaterial from 'vue-material';
-import 'vue-material/dist/vue-material.css';
-import VueRouter from 'vue-router';
 import App from './App.vue';
 import VeeValidate from 'vee-validate';
+import router from './router';
+import VueMaterial from 'vue-material';
+import 'vue-material/dist/vue-material.css';
 
 
-Vue.use(VueRouter);
 Vue.use(VeeValidate);
 Vue.config.productionTip = false
 
 new Vue({
+  router, 
   render: h => h(App),
 }).$mount('#app')
 
