@@ -4,7 +4,10 @@
       <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
       <form @submit.prevent="addSkill">
         <input type="text" placeholder="Enter a skill you have.." v-model="skill" v-validate="'min:3'" name="skill">
-        <p class="alert" v-if="errors.has('skill')">{{errors.first('skill') }}</p>
+        
+        <transition name="alert-in">
+          <p class="alert" v-if="errors.has('skill')">{{errors.first('skill') }}</p>
+        </transition>
       </form>
       
       <ul>
@@ -75,7 +78,7 @@ p {
 }
 
 input {
-  width: calc(100% - 40px);
+  width: calc(108.5% - 40px);
   border: 0;
   padding: 20px;
   font-size: 1.3em;
@@ -91,4 +94,23 @@ input {
   margin-top: -20px;
 }
 
+.alert-in-enter-active {
+  animation: bounce-in .5s;
+}
+
+.alert-in-leave-active {
+  animation: bounce-in .5s reverse;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 </style>
