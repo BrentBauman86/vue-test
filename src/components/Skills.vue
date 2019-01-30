@@ -11,7 +11,10 @@
       </form>
       
       <ul>
-          <li v-for="(data, index) in skills" :key='index'> {{ data.skill }}</li>
+          <li v-for="(data, index) in skills" :key='index'> 
+            {{ data.skill }}
+            <i class='fa fa-minus-circle' v-on:click="remove(index)"></i>
+            </li>
       </ul>
 
     <p>These are the skills you possess.</p>
@@ -41,14 +44,18 @@ export default {
           console.log('Not valid');
         }
       })
+    },
+    remove(id) {
+      this.skills.splice(id,1);
+      }
     }
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 @import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
+@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 
 .holder {
   background: #fff;
@@ -114,5 +121,10 @@ input {
   100% {
     transform: scale(1);
   }
+}
+
+i {
+  float: right;
+  cursor: pointer;
 }
 </style>
