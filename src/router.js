@@ -4,6 +4,7 @@ import Skills from './components/Skills.vue';
 import About from './components/About.vue';
 import Login from './components/Login.vue';
 import Signup from './components/Signup.vue'
+import { truncate } from 'fs';
 
 Vue.use(Router);
 
@@ -12,13 +13,21 @@ export default new Router({
         {
         path: '/',
         name: 'skills',
-        component: Skills 
+        component: Skills,
+        meta: {
+            requireAuth: truncate
+        }
         },
 
         {
         path: '/about/:name',
         name: 'about',
         component: About
+        },
+
+        {
+        path: '*',
+        redirect: '/login'
         },
 
         { 
