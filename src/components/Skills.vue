@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <div class="holder">
-      
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
       <form @submit.prevent="addSkill">
         <input type="text" placeholder="Enter a skill you have.." v-model="skill">
       </form>
@@ -25,6 +25,12 @@ export default {
       {"skill": "Vue.js"},
       {"skill": "Frontend Developer"},
     ]
+    }
+  },
+  methods: {
+    addSkill() {
+      this.skills.push({skill: this.skill})
+      this.skill=  "";
     }
   }
 }
@@ -66,7 +72,7 @@ input {
   border: 0;
   padding: 20px;
   font-size: 1.3em;
-  background-color: #3223333;
+  background-color: #322333;
   color: #687f7f;
 }
 
