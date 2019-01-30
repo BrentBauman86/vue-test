@@ -5,13 +5,13 @@
       <form @submit.prevent="addSkill">
         <input type="text" placeholder="Enter a skill you have.." v-model="skill" v-validate="'min:3'" name="skill">
         
-        <transition name="alert-in">
+        <transition name="alert-in" enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
           <p class="alert" v-if="errors.has('skill')">{{errors.first('skill') }}</p>
         </transition>
       </form>
       
       <ul>
-        <li v-for="(data, index) in skills" :key='index'>{{index}}. {{data.skill}}</li>
+          <li v-for="(data, index) in skills" :key='index'> {{ data.skill }}</li>
       </ul>
 
     <p>These are the skills you possess.</p>
@@ -26,9 +26,9 @@ export default {
    return {
     skill: "", 
     skills: [
-      // {"skill": "Vue.js"},
-      // {"skill": "Frontend Developer"},
-    ]
+      {"skill": "Vue.js"},
+      {"skill": "Frontend Developer"},
+      ]
     }
   },
   methods: {
@@ -48,6 +48,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+@import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
+
 .holder {
   background: #fff;
 }
@@ -68,7 +70,7 @@ ul li {
 }
 
 p {
-  test-align: center;
+  text-align: center;
   padding: 30px 0;
   color: gray;
 }
