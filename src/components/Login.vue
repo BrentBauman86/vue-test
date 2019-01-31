@@ -38,7 +38,7 @@
 
     </script>
 
-    <style scoped>
+    <style scoped src="materialize-css/dist/css/materialize.min.css">
     .login {
         margin-top: 40px;
     }

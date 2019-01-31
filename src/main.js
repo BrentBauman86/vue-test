@@ -7,7 +7,6 @@ import VCalendar from 'v-calendar';
 import 'v-calendar/lib/v-calendar.min.css';
 import 'materialize-css/dist/css/materialize.min.css'
 
-
 Vue.use(VeeValidate);
 Vue.use(VCalendar, {
   formats: {
@@ -18,11 +17,12 @@ Vue.use(VCalendar, {
     dayPopover: 'L',
   }
 });
+
 Vue.config.productionTip = false;
 
 let app = '';
 
-  firebase.initializeApp({
+    firebase.initializeApp({
     apiKey: "AIzaSyDON7iKIBMp8Oh2ABLRjT4epc6ggaNMQB4",
     authDomain: "vue-firebase-aa748.firebaseapp.com",
     databaseURL: "https://vue-firebase-aa748.firebaseio.com",

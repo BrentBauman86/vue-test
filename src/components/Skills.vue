@@ -1,8 +1,9 @@
 <template>
   <div class="hello">
     <div class="holder">
-      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
+      <!-- <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons"> -->
        
+      <div class="border">
       <form @submit.prevent="addTask">
 
         <v-date-picker
@@ -22,7 +23,7 @@
           <p class="alert" v-if="errors.has('skill')">{{errors.first('skill') }}</p>
         </transition>
       </form>
-      
+      </div>
       <ul>
           <li v-for="(task, index) in tasks" :key='index'> 
             {{ task.title }} {{task.description}} {{task.category}} {{task.taskDeadline}}
@@ -107,9 +108,18 @@ export default {
   }
 </script>
 
-<style scoped>
+<style>
 @import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+
+.border {
+  border-color: coral;
+  border-style: groove;
+  padding-top: 50px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 30px;
+}
 
 .holder {
   background: #fff;

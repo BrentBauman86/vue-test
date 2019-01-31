@@ -34,7 +34,8 @@
     }
     </script>
 
-    <style scoped>
+    <style scoped src="materialize-css/dist/css/materialize.min.css">
+
     .signup {
         margin-top: 40px;
     }

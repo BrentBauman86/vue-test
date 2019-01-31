@@ -1,11 +1,11 @@
 <template>
   <div id="app">
+    <div class="hello">
     <nav>
       <router-link to="/">Home</router-link>
-      <router-link to="/about">About</router-link>
     </nav>
-
       <router-view />
+  </div>
   </div>
 </template>
 
@@ -45,10 +45,12 @@ nav a {
   padding: 10px;
   text-decoration: none;
   background: #fff;
-  border-radius: 3px;
+  border-radius: 2px;
   color: rgb(0, 110, 255);
   font-weight: bold;
   margin-right: 15px;
+  margin-left: 5px;
+  flex: 100;
 }
 
 </style>
