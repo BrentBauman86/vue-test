@@ -5,9 +5,15 @@ import VeeValidate from 'vee-validate';
 import router from './router';
 // import VueMaterial from 'vue-material';
 // import 'vue-material/dist/vue-material.css';
+import VCalendar from 'v-calendar';
+import 'v-calendar/lib/v-calendar.min.css';
+
 
 
 Vue.use(VeeValidate);
+Vue.use(VCalendar, {
+  firstDayOfWeek: 1           
+});
 Vue.config.productionTip = false;
 
 

@@ -2,6 +2,8 @@
   <div class="hello">
     <div class="holder">
       <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
+        <v-calendar :attributes='attrs'>
+          </v-calendar>
       <form @submit.prevent="addSkill">
         <input type="text" placeholder="Enter a skill you have.." v-model="skill" v-validate="'min:3'" name="skill">
         
@@ -20,6 +22,14 @@
         <p>These are the skills you possess.</p>
       </div>
     <button @click='logout'>Logout</button>
+
+<!-- <v-calendar
+    is-double-paned>
+  </v-calendar>
+  <v-date-picker
+    mode='single'
+    v-model='selectedValue'>
+  </v-date-picker> -->
   </div>
 </template>
 
@@ -30,10 +40,31 @@ export default {
   name: 'Skills',
  data() {
    return {
+     selectedValue: new Date(),
+  attrs: [
+        {
+          key: 'today',
+          dates: new Date(2019, 0, 31),
+          highlight: {
+            backgroundColor: '#ff8080',
+          },
+          // Just use a normal style
+          contentStyle: {
+            color: '#fafafa',
+          },
+          // Our new popover here
+          popover: {
+            label: 'You just hovered over today\'s date!',
+          }
+        },
+      ],
+
+
     skill: "", 
     skills: [
       {"skill": "Vue.js"},
       {"skill": "Frontend Developer"},
+
       ]
     }
   },
@@ -96,7 +127,7 @@ p {
 }
 
 input {
-  width: calc(108.5% - 40px);
+  width: calc(100% - 40px);
   border: 0;
   padding: 20px;
   font-size: 1.3em;
