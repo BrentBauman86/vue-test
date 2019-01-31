@@ -102,7 +102,7 @@ export default {
           this.taskDeadline = ""
         },
     remove(id) {
-      this.skills.splice(id,1);
+      this.tasks.splice(id,1);
       }
     }
   }
