@@ -2,7 +2,7 @@
   <div id="app">
     <div class="hello">
     <nav>
-      <router-link to="/">Home</router-link>
+      <h3>ToDo.Vue</h3>
     </nav>
       <router-view />
   </div>
@@ -51,6 +51,13 @@ nav a {
   margin-right: 15px;
   margin-left: 5px;
   flex: 100;
+}
+
+h3 {
+  padding-top: 10px;
+  padding-bottom: 100px;
+  margin-bottom: 6px;
+  text-align: center;
 }
 
 </style>

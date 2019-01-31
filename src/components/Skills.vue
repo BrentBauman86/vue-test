@@ -5,13 +5,14 @@
        
       <div class="border">
       <form @submit.prevent="addTask">
+        <p>Fill out your task list!</p>
 
         <v-date-picker
         :formats="formats"
           mode='single'
           v-model='taskDeadline'>
         </v-date-picker> 
-        
+
         <input type='text' placeholder='pick a date...' v-model='taskDeadline' >
         <input type='text' placeholder='Task title' v-model='title' >
         <input type='text' placeholder='Task description' v-model='description' >
@@ -115,7 +116,7 @@ export default {
 .border {
   border-color: coral;
   border-style: groove;
-  padding-top: 50px;
+  padding-top: 10px;
   padding-right: 30px;
   padding-bottom: 50px;
   padding-left: 30px;

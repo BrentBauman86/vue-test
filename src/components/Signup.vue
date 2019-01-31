@@ -37,7 +37,7 @@
     <style scoped src="materialize-css/dist/css/materialize.min.css">
 
     .signup {
-        margin-top: 40px;
+        margin-top: 20px;
     }
 
     input {
@@ -47,7 +47,7 @@
     }
 
     button {
-        margin-top: 20px;
+        margin-top: 0px;
         width: 20%;
         cursor: pointer;
     }

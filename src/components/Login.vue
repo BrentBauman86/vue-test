@@ -40,7 +40,8 @@
 
     <style scoped src="materialize-css/dist/css/materialize.min.css">
     .login {
-        margin-top: 40px;
+        margin-top: 1000px;
+        margin-bottom: 100px;
     }
 
     input {
@@ -50,13 +51,15 @@
     }
 
     button {
-        margin-top: 20px;
+        margin-top: 0px;
+        margin-bottom: 100px;
         width: 20%;
         cursor: pointer;
     }
 
     p {
-        margin-top: 40px;
+        margin-top: 0px;
+        margin-bottom: 100px;
         font-size: 13px;
     }
 
