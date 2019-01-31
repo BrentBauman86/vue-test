@@ -20,21 +20,19 @@
             };
         },
         methods: {
-            login: function() {
-                this.$router.replace('/');
-            }
-        },
         login: function() {
             firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
-                function(user) {
-                    alert ('Well done!  You are now connected.')
+                (user) => {
+                    this.$router.replace('/')
                 },
-                function(err) {
+                (err) => {
                     alert('Oops. ' + err.message)
-                }
-            );
+                    }
+                );
+            }
         }
     }
+
     </script>
 
     <style scoped>
