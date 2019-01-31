@@ -55,7 +55,7 @@ nav a {
 
 h3 {
   padding-top: 10px;
-  padding-bottom: 100px;
+  padding-bottom: 1px;
   margin-bottom: 6px;
   text-align: center;
 }

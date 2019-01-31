@@ -1,11 +1,9 @@
 <template>
 <div class="login">
+    
     <h3>Login</h3>
-
     <input type="text" v-model="email" placeholder="Email"><br>
     <input type="password" v-model="password" placeholder="Password"><br>
-
-
     <button @click="login">Submit</button>
     <p>Don't have an account?  Feel free to <router-link to='/sign-up'>create one!</router-link></p>
     </div>
@@ -40,8 +38,6 @@
 
     <style scoped src="materialize-css/dist/css/materialize.min.css">
     .login {
-        margin-top: 1000px;
-        margin-bottom: 100px;
     }
 
     input {
@@ -66,5 +62,9 @@
     p a {
         text-decoration: underline;
         cursor: pointer;
+     }
+
+     h3 {
+         padding-top: 45px;
      }
     </style>
