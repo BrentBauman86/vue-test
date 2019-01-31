@@ -1,24 +1,16 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Skills from './components/Skills.vue';
-import About from './components/About.vue';
-import Login from './components/Login.vue';
-import Signup from './components/Signup.vue'
-import { truncate } from 'fs';
+import Skills from '@/components/Skills';
+import About from '@/components/About';
+import Login from '@/components/Login';
+import Signup from '@/components/Signup'
+import firebase from 'firebase'
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
     routes: [
-        {
-        path: '/',
-        name: 'skills',
-        component: Skills,
-        meta: {
-            requireAuth: truncate
-        }
-        },
-
+     
         {
         path: '/about/:name',
         name: 'about',
@@ -40,6 +32,26 @@ export default new Router({
         path: '/sign-up',
         name: 'signup',
         component: Signup
+        },
+    
+        {
+        path: '/',
+        name: 'skills',
+        component: Skills,
+        meta: {
+          requiresAuth: true
         }
+      }
     ]
-})
+});
+
+router.beforeEach((to, from, next) => {
+    const currentUser = firebase.auth().currentUser;
+    const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+
+    if (requiresAuth && !currentUser) next('login');
+    else if (!requiresAuth && currentUser) next('/');
+    else next();
+});
+
+export default router;
