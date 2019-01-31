@@ -5,26 +5,28 @@
        
 
 
-      <form @submit.prevent="addSkill">
+      <form @submit.prevent="addTask">
 
         <v-date-picker
           mode='single'
-          v-model='selectedValue'>
+          v-model='taskDeadline'>
         </v-date-picker> 
 
-        <input type='text' placeholder='pick a date...' v-model='selectedValue' >
+        <input type='text' placeholder='pick a date...' v-model='taskDeadline' >
         <input type='text' placeholder='Task title' v-model='title' >
         <input type='text' placeholder='Task description' v-model='description' >
-        <input type="text" placeholder="Task category" v-model="category" v-validate="'min:3'" name="skill">
+        <input type="text" placeholder="Task category" v-model="category" v-validate="'min:3'">
         
+        <button class="button is-medium is-primary" type="submit">Create Task</button>
+
         <transition name="alert-in" enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
           <p class="alert" v-if="errors.has('skill')">{{errors.first('skill') }}</p>
         </transition>
       </form>
       
       <ul>
-          <li v-for="(data, index) in skills" :key='index'> 
-            {{ data.skills }}
+          <li v-for="(task, index) in tasks" :key='index'> 
+            {{ task.title }} {{task.description}} {{task.category}} {{task.taskDeadline}}
             <i class='fa fa-minus-circle' v-on:click="remove(index)"></i>
           </li>
       </ul>
@@ -43,7 +45,7 @@ export default {
   
  data() {
    return {
-     selectedValue: new Date(),
+     taskDeadline: new Date(),
   attrs: [
         {
           key: 'today',
@@ -65,8 +67,10 @@ export default {
     title: "",
     description: "",
     category: "",
-    skills: [
-      {task: ""},
+    taskDeadline: "",
+
+    tasks: [
+      
       ]
     }
   },
@@ -77,16 +81,17 @@ export default {
       })
     },
 
-    addSkill() {
-      this.$validator.validateAll().then((result) => {
-        if (result) {
-          this.skills.push({skill: this.skill})
-          this.skill = "";
-        } else {
-          console.log('Not valid');
-        }
-      })
-    },
+    addTask() {
+          this.tasks.push({title: this.title})
+          this.tasks.push({description: this.description})
+          this.tasks.push({category: this.category})
+          this.tasks.push({taskDeadline: this.taskDeadline})
+
+          this.title = "";
+          this.description = "";
+          this.category = "";
+          this.taskDeadline = ""
+        },
     remove(id) {
       this.skills.splice(id,1);
       }
