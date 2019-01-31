@@ -2,10 +2,20 @@
   <div class="hello">
     <div class="holder">
       <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
-        <v-calendar :attributes='attrs'>
-          </v-calendar>
+       
+
+
       <form @submit.prevent="addSkill">
-        <input type="text" placeholder="Enter a skill you have.." v-model="skill" v-validate="'min:3'" name="skill">
+
+        <v-date-picker
+          mode='single'
+          v-model='selectedValue'>
+        </v-date-picker> 
+
+        <input type='text' placeholder='pick a date...' v-model='selectedValue' >
+        <input type='text' placeholder='Task title' v-model='title' >
+        <input type='text' placeholder='Task description' v-model='description' >
+        <input type="text" placeholder="Task category" v-model="category" v-validate="'min:3'" name="skill">
         
         <transition name="alert-in" enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
           <p class="alert" v-if="errors.has('skill')">{{errors.first('skill') }}</p>
@@ -14,22 +24,14 @@
       
       <ul>
           <li v-for="(data, index) in skills" :key='index'> 
-            {{ data.skill }}
+            {{ data.skills }}
             <i class='fa fa-minus-circle' v-on:click="remove(index)"></i>
-            </li>
+          </li>
       </ul>
 
-        <p>These are the skills you possess.</p>
+        <p>Above are all the things you need to do.</p>
       </div>
     <button @click='logout'>Logout</button>
-
-<!-- <v-calendar
-    is-double-paned>
-  </v-calendar>
-  <v-date-picker
-    mode='single'
-    v-model='selectedValue'>
-  </v-date-picker> -->
   </div>
 </template>
 
@@ -38,6 +40,7 @@ import firebase from 'firebase';
 
 export default {
   name: 'Skills',
+  
  data() {
    return {
      selectedValue: new Date(),
@@ -59,12 +62,11 @@ export default {
         },
       ],
 
-
-    skill: "", 
+    title: "",
+    description: "",
+    category: "",
     skills: [
-      {"skill": "Vue.js"},
-      {"skill": "Frontend Developer"},
-
+      {task: ""},
       ]
     }
   },
