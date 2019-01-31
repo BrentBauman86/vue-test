@@ -1,8 +1,11 @@
 <template>
 <div class="login">
     <h3>Login</h3>
+
     <input type="text" v-model="email" placeholder="Email"><br>
     <input type="password" v-model="password" placeholder="Password"><br>
+
+
     <button @click="login">Submit</button>
     <p>Don't have an account?  Feel free to <router-link to='/sign-up'>create one!</router-link></p>
     </div>
@@ -19,19 +22,19 @@
                 password: ''
             };
         },
-        methods: {
-        login: function() {
-            firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
-                (user) => {
-                    this.$router.replace('/')
-                },
-                (err) => {
-                    alert('Oops. ' + err.message)
-                    }
-                );
-            }
+    methods: {
+    login: function() {
+        firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
+            (user) => {
+                this.$router.replace('/')
+            },
+            (err) => {
+                alert('Oops. ' + err.message)
+                }
+            );
         }
     }
+}
 
     </script>
 

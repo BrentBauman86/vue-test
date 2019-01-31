@@ -3,15 +3,14 @@
     <div class="holder">
       <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
        
-
-
       <form @submit.prevent="addTask">
 
         <v-date-picker
+        :formats="formats"
           mode='single'
           v-model='taskDeadline'>
         </v-date-picker> 
-
+        
         <input type='text' placeholder='pick a date...' v-model='taskDeadline' >
         <input type='text' placeholder='Task title' v-model='title' >
         <input type='text' placeholder='Task description' v-model='description' >
@@ -35,6 +34,7 @@
       </div>
     <button @click='logout'>Logout</button>
   </div>
+
 </template>
 
 <script>
@@ -46,6 +46,16 @@ export default {
  data() {
    return {
      taskDeadline: new Date(),
+
+     taskDeadline: null,
+      formats: {
+        title: 'MMMM YYYY',
+        weekdays: 'W',
+        navMonths: 'MMM',
+        input: ['L', 'YYYY-MM-DD', 'YYYY/MM/DD'],
+        dayPopover: 'L', 
+      },
+
   attrs: [
         {
           key: 'today',
@@ -53,11 +63,9 @@ export default {
           highlight: {
             backgroundColor: '#ff8080',
           },
-          // Just use a normal style
           contentStyle: {
             color: '#fafafa',
           },
-          // Our new popover here
           popover: {
             label: 'You just hovered over today\'s date!',
           }
@@ -99,7 +107,6 @@ export default {
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 @import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";

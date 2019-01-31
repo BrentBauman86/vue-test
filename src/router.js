@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Skills from '@/components/Skills';
-import About from '@/components/About';
 import Login from '@/components/Login';
 import Signup from '@/components/Signup'
 import firebase from 'firebase'
@@ -11,11 +10,6 @@ Vue.use(Router);
 const router = new Router({
     routes: [
      
-        {
-        path: '/about/:name',
-        name: 'about',
-        component: About
-        },
 
         {
         path: '*',

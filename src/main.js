@@ -3,19 +3,22 @@ import Vue from 'vue';
 import App from './App.vue';
 import VeeValidate from 'vee-validate';
 import router from './router';
-// import VueMaterial from 'vue-material';
-// import 'vue-material/dist/vue-material.css';
 import VCalendar from 'v-calendar';
 import 'v-calendar/lib/v-calendar.min.css';
-
+import 'materialize-css/dist/css/materialize.min.css'
 
 
 Vue.use(VeeValidate);
 Vue.use(VCalendar, {
-  firstDayOfWeek: 1           
+  formats: {
+    title: 'MMMM YYYY',
+    weekdays: 'W',
+    navMonths: 'MMM',
+    input: ['L', 'YYYY-MM-DD', 'YYYY/MM/DD'],
+    dayPopover: 'L',
+  }
 });
 Vue.config.productionTip = false;
-
 
 let app = '';
 
@@ -27,6 +30,7 @@ let app = '';
     storageBucket: "vue-firebase-aa748.appspot.com",
     messagingSenderId: "893822455968"
   });
+
 
   firebase.auth().onAuthStateChanged(() => {
     if (!app) {
