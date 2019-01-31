@@ -17,12 +17,15 @@
             </li>
       </ul>
 
-    <p>These are the skills you possess.</p>
-  </div>
+        <p>These are the skills you possess.</p>
+      </div>
+    <button @click='logout'>Logout</button>
   </div>
 </template>
 
 <script>
+import firebase from 'firebase';
+
 export default {
   name: 'Skills',
  data() {
@@ -35,6 +38,12 @@ export default {
     }
   },
   methods: {
+    logout: function() {
+      firebase.auth().signOut().then(() => {
+        this.$router.replace('login')
+      })
+    },
+
     addSkill() {
       this.$validator.validateAll().then((result) => {
         if (result) {
