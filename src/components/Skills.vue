@@ -189,7 +189,9 @@ input {
 }
 
 i {
-  float: right;
+  margin: 0 auto;
+  width: 350px;
+  text-align: center;
   cursor: pointer;
 }
 </style>
