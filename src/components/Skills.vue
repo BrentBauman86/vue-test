@@ -18,7 +18,7 @@
         <input type='text' placeholder='Task description' v-model='description' >
         <input type="text" placeholder="Task category" v-model="category" v-validate="'min:3'">
         
-        <button class="button is-medium is-primary" type="submit">Create Task</button>
+        <button class="btn waves-effect waves-light" type="submit">Create Task</button>
 
         <transition name="alert-in" enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
           <p class="alert" v-if="errors.has('skill')">{{errors.first('skill') }}</p>
@@ -34,7 +34,8 @@
 
         <p>Above are all the things you need to do.</p>
       </div>
-    <button @click='logout'>Logout</button>
+    <button class="btn waves-effect waves-light" @click='logout'>Logout</button>
+
   </div>
 
 </template>

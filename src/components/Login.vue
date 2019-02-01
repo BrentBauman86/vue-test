@@ -1,13 +1,12 @@
 <template>
 <div class="login">
-    
     <h3>Login</h3>
-    <input type="text" v-model="email" placeholder="Email"><br>
-    <input type="password" v-model="password" placeholder="Password"><br>
-    <button @click="login">Submit</button>
-    <p>Don't have an account?  Feel free to <router-link to='/sign-up'>create one!</router-link></p>
+        <input type="text" v-model="email" placeholder="Email"><br>
+        <input type="password" v-model="password" placeholder="Password"><br>
+        <button class="btn waves-effect waves-light" @click='login'>Submit</button>
+        <p>Don't have an account?  Feel free to <router-link to='/sign-up'>create one!</router-link></p>
     </div>
-    </template>
+</template>
 
     <script>
     import firebase from 'firebase';
