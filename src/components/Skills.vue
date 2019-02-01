@@ -13,6 +13,18 @@
           v-model='taskDeadline'>
         </v-date-picker> 
 
+
+ <form @submit.prevent="formPost">
+    <textarea v-model="message" />
+    <input type="submit" value="DUNK!" />
+  </form>
+
+
+
+
+
+
+
         <input type='text' placeholder='pick a date...' v-model='taskDeadline' >
         <input type='text' placeholder='Task title' v-model='title' >
         <input type='text' placeholder='Task description' v-model='description' >
@@ -49,11 +61,26 @@
 <script>
 import firebase from 'firebase';
 
+import {store} from './store';
+
 export default {
   name: 'Skills',
-  
+
  data() {
    return {
+
+message: null,
+
+
+
+
+
+
+
+
+
+
+
      taskDeadline: new Date(),
 
      taskDeadline: null,
@@ -95,6 +122,15 @@ export default {
         this.$router.replace('login')
       })
     },
+
+    formPost(){
+      store.writeTask(this.message);
+    },
+
+
+
+
+
 
     addTask() {
           
