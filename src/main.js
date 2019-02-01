@@ -21,7 +21,7 @@ Vue.use(VCalendar, {
 
 Vue.config.productionTip = false;
 
-// let app = '';
+let app = '';
 
     var config = {
     apiKey: "AIzaSyDON7iKIBMp8Oh2ABLRjT4epc6ggaNMQB4",
@@ -33,11 +33,11 @@ Vue.config.productionTip = false;
   };
   firebase.initializeApp(config);
 
-  // export const store = {
-  //   ballsInFeed: null,
-  //   currentUser: null,
-  //   writeBall: (message) => console.log(message)
-  // };
+  export const store = {
+    tasksInFeed: null,
+    currentUser: null,
+    writeTask: (message) => console.log(message)
+  };
 
   const tasksCollection = firebase.firestore()
   .collection('tasks');

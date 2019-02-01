@@ -13,18 +13,6 @@
           v-model='taskDeadline'>
         </v-date-picker> 
 
-
- <form @submit.prevent="formPost">
-    <textarea v-model="message" />
-    <input type="submit" value="DUNK!" />
-  </form>
-
-
-
-
-
-
-
         <input type='text' placeholder='pick a date...' v-model='taskDeadline' >
         <input type='text' placeholder='Task title' v-model='title' >
         <input type='text' placeholder='Task description' v-model='description' >
@@ -32,26 +20,29 @@
         
         <button class="btn waves-effect waves-light" type="submit">Create Task</button>
 
+              <!-- <i class='fa fa-minus-circle' v-on:submit="addTask">create task</i> -->
+
+
         <transition name="alert-in" enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
           <p class="alert" v-if="errors.has('skill')">{{errors.first('skill') }}</p>
         </transition>
       </form>
       </div>
+
       <ul>
           <li v-for="(task, index) in tasks" :key='index'> 
-
-
 
                 <input type="checkbox" v-model="status" value="accepted" unchecked-value='not_accepted'>
                 <label for="checkbox">{{ status }}</label>
 
-            <p>Title:{{ task.title }}<br></p> <p>Description:{{task.description}}<br></p><p>Category:{{task.category}}<br></p><p>Due Date:{{task.taskDeadline}}</p>
-            <i class='fa fa-minus-circle' v-on:click="remove(index)"></i>
+                <p>Title:{{ task.title }}<br></p> <p>Description:{{task.description}}<br></p><p>Category:{{task.category}}<br></p><p>Due Date:{{task.taskDeadline}}</p>
+            
+                <div class='card-footer'>
+                  <i class='fa fa-trash' v-on:click="remove(index)"></i>
+                </div>
           </li>
       </ul>
-
         <p>Above are all the things you need to do.</p>
-
       </div>
     <button class="btn waves-effect waves-light" @click='logout'>Logout</button>
   </div>
@@ -61,7 +52,7 @@
 <script>
 import firebase from 'firebase';
 
-import {store} from './store';
+// import {store} from './skills';
 
 export default {
   name: 'Skills',
@@ -70,16 +61,6 @@ export default {
    return {
 
 message: null,
-
-
-
-
-
-
-
-
-
-
 
      taskDeadline: new Date(),
 
@@ -123,14 +104,13 @@ message: null,
       })
     },
 
-    formPost(){
-      store.writeTask(this.message);
+    // formPost(){
+    //   store.writeTask(this.message);
+    // },
+
+    selectCategory(category) {
+      return this.selectedCategory.includes(category)
     },
-
-
-
-
-
 
     addTask() {
           
@@ -138,6 +118,7 @@ message: null,
           description: this.description, 
           category: this.category, 
           taskDeadline: this.taskDeadline})
+
 
           this.title = "";
           this.description = "";
@@ -156,8 +137,8 @@ message: null,
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 
 .border {
-  border-color: coral;
-  border-style: groove;
+  border-color: #ee6e73;
+  border-style: solid;
   padding-top: 10px;
   padding-right: 30px;
   padding-bottom: 50px;
@@ -185,7 +166,7 @@ ul li {
 
 p {
   text-align: center;
-  padding: 30px 0;
+  padding: 15px 0;
   color: gray;
 }
 
@@ -230,11 +211,28 @@ input {
   }
 }
 
+.card-footer {
+    align-items: center;
+    display: flex;
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 0;
+    justify-content: center;
+    padding: .75rem;
+}
+
+.icon {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
 i {
+  display: block;
   margin: 0 auto;
-  width: 350px;
   text-align: center;
   cursor: pointer;
 }
-
 </style>

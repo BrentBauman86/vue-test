@@ -10,32 +10,24 @@ Vue.use(Router);
 const router = new Router({
     routes: [
      
-        {
-        path: '*',
-        redirect: '/login'
-        },
+    { path: '*', 
+    redirect: '/login' },
 
-        { 
-        path: '/login',
-        name: 'login',
-        component: Login 
-        },
+    { path: '/login', 
+    name: 'login', 
+    component: Login },
 
-        {
-        path: '/sign-up',
-        name: 'signup',
-        component: Signup
-        },
-    
-        {
-        path: '/',
-        name: 'skills',
-        component: Skills,
-        meta: {
-          requiresAuth: true
+    { path: '/sign-up', 
+    name: 'signup', 
+    component: Signup },
+
+    { path: '/',
+    name: 'skills',
+    component: Skills,meta: {
+    requiresAuth: true
         }
-      }
-    ]
+    }
+]
 });
 
 router.beforeEach((to, from, next) => {
