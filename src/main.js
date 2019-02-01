@@ -6,6 +6,7 @@ import router from './router';
 import VCalendar from 'v-calendar';
 import 'v-calendar/lib/v-calendar.min.css';
 import 'materialize-css/dist/css/materialize.min.css'
+import 'firebase/firestore';
 
 Vue.use(VeeValidate);
 Vue.use(VCalendar, {

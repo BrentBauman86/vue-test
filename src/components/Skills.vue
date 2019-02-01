@@ -27,15 +27,21 @@
       </div>
       <ul>
           <li v-for="(task, index) in tasks" :key='index'> 
+
+
+
+                <input type="checkbox" v-model="status" value="accepted" unchecked-value='not_accepted'>
+                <label for="checkbox">{{ status }}</label>
+
             <p>Title:{{ task.title }}<br></p> <p>Description:{{task.description}}<br></p><p>Category:{{task.category}}<br></p><p>Due Date:{{task.taskDeadline}}</p>
             <i class='fa fa-minus-circle' v-on:click="remove(index)"></i>
           </li>
       </ul>
 
         <p>Above are all the things you need to do.</p>
+
       </div>
     <button class="btn waves-effect waves-light" @click='logout'>Logout</button>
-
   </div>
 
 </template>
@@ -194,4 +200,5 @@ i {
   text-align: center;
   cursor: pointer;
 }
+
 </style>
