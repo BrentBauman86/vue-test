@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <div class="holder">
-      <!-- <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons"> -->
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
        
       <div class="border">
       <form @submit.prevent="addTask">
@@ -17,14 +17,11 @@
         <input type='text' placeholder='Task title' v-model='title' >
         <input type='text' placeholder='Task description' v-model='description' >
         <input type="text" placeholder="Task category" v-model="category" v-validate="'min:3'">
-        
+
         <button class="btn waves-effect waves-light" type="submit">Create Task</button>
 
-              <!-- <i class='fa fa-minus-circle' v-on:submit="addTask">create task</i> -->
-
-
         <transition name="alert-in" enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
-          <p class="alert" v-if="errors.has('skill')">{{errors.first('skill') }}</p>
+          <p class="alert" v-if="errors.has('task')">{{errors.first('task') }}</p>
         </transition>
       </form>
       </div>
@@ -32,14 +29,19 @@
       <ul>
           <li v-for="(task, index) in tasks" :key='index'> 
 
-                <input type="checkbox" v-model="status" value="accepted" unchecked-value='not_accepted'>
-                <label for="checkbox">{{ status }}</label>
+                <input type="checkbox" id="checkbox" v-model="checked">
 
                 <p>Title:{{ task.title }}<br></p> <p>Description:{{task.description}}<br></p><p>Category:{{task.category}}<br></p><p>Due Date:{{task.taskDeadline}}</p>
             
                 <div class='card-footer'>
                   <i class='fa fa-trash' v-on:click="remove(index)"></i>
                 </div>
+
+<input type="radio" value="One" v-model="picked">
+<input type="radio" value="Two" v-model="picked">
+<span>Picked: {{ picked }}</span>
+
+
           </li>
       </ul>
         <p>Above are all the things you need to do.</p>
@@ -60,9 +62,17 @@ export default {
  data() {
    return {
 
-message: null,
+    picked: '',
 
-     taskDeadline: new Date(),
+    message: null,
+
+    checkbox: "",
+    title: "",
+    description: "",
+    category: "",
+    taskDeadline: "",
+
+    //  taskDeadline: new Date(),
 
      taskDeadline: null,
       formats: {
@@ -73,7 +83,7 @@ message: null,
         dayPopover: 'L', 
       },
 
-  attrs: [
+      attrs: [
         {
           key: 'today',
           dates: new Date(2019, 0, 31),
@@ -89,14 +99,10 @@ message: null,
         },
       ],
 
-    title: "",
-    description: "",
-    category: "",
-    taskDeadline: "",
-
     tasks: []
     }
   },
+
   methods: {
     logout: function() {
       firebase.auth().signOut().then(() => {
@@ -125,11 +131,21 @@ message: null,
           this.category = "";
           this.taskDeadline = ""
         },
+
     remove(id) {
       this.tasks.splice(id,1);
       }
+    },
+
+    computed: {
+      completedTasks: function () {
+        return this.tasks.filter(task => task.completed)
+      },
+       incompleteTasks: function () {
+        return this.tasks.filter(task => !task.completed)
     }
   }
+}
 </script>
 
 <style>
@@ -157,11 +173,12 @@ ul {
 
 ul li {
   padding: 20px;
-  font-size: 1.3em;
-  background-color: #e0edf4;
-  border-left: 5px solid #3eb3f6;
+  font-size: 1em;
+  border-style: solid;
+  border-color: #ee6e73;
+  border-radius: 25px;
   margin-bottom: 2px;
-  color: #3e5252;
+  color: gray;
 }
 
 p {
@@ -235,4 +252,10 @@ i {
   text-align: center;
   cursor: pointer;
 }
+
+#checkbox input {
+  display: inline-block;
+  margin-right: 10px;
+}
+
 </style>

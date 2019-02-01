@@ -1,6 +1,12 @@
 <template>
   <div id="app">
     <div class="hello">
+      <div class='nav'>
+      <nav>
+        <router-link to="/view">View Task</router-link>
+        </nav>
+        </div>
+
     <nav>
       <h3>ToDo.Vue</h3>
     </nav>
@@ -41,12 +47,12 @@ body, html {
   width: 50%;
 }
 
-nav a {
+.nav {
   padding: 10px;
   text-decoration: none;
   background: #fff;
   border-radius: 2px;
-  color: rgb(0, 110, 255);
+  color: black;
   font-weight: bold;
   margin-right: 15px;
   margin-left: 5px;
