@@ -27,7 +27,7 @@
       </div>
       <ul>
           <li v-for="(task, index) in tasks" :key='index'> 
-            {{ task.title }} {{task.description}} {{task.category}} {{task.taskDeadline}}
+            <p>Title:{{ task.title }}<br></p> <p>Description:{{task.description}}<br></p><p>Category:{{task.category}}<br></p><p>Due Date:{{task.taskDeadline}}</p>
             <i class='fa fa-minus-circle' v-on:click="remove(index)"></i>
           </li>
       </ul>
@@ -80,9 +80,7 @@ export default {
     category: "",
     taskDeadline: "",
 
-    tasks: [
-      
-      ]
+    tasks: []
     }
   },
   methods: {
@@ -93,10 +91,11 @@ export default {
     },
 
     addTask() {
-          this.tasks.push({title: this.title})
-          this.tasks.push({description: this.description})
-          this.tasks.push({category: this.category})
-          this.tasks.push({taskDeadline: this.taskDeadline})
+          
+          this.tasks.push({title: this.title,
+          description: this.description, 
+          category: this.category, 
+          taskDeadline: this.taskDeadline})
 
           this.title = "";
           this.description = "";
