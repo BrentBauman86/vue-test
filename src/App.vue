@@ -12,7 +12,9 @@
     <nav>
       <h3>ToDo.Vue</h3>
     </nav>
-      <router-view />
+      <transition name= "router-anim" enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutDown">
+        <router-view />
+    </transition>
   </div>
 </template>
 
@@ -29,6 +31,7 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+@import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
 
 body {
   background-color: #eeeeee;
@@ -46,6 +49,11 @@ body, html {
 
 #app {
   width: 50%;
+}
+
+.page {
+  position: fixed;
+  width: inherit;
 }
 
 .nav {
