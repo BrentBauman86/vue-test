@@ -3,22 +3,26 @@
     <div class="holder">
       <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
        
+
+
+      <input type="text" v-model='search' placeholder='search categories'/>
+        <div v-for='(task, index) in filteredCategories' :key='index'>
+          </div>
+
       <div class="border">
+
       <form @submit.prevent="addTask">
         <p>Fill out your task list!</p>
 
-        <v-date-picker
-      :formats="formats"
-         mode='single'
-        v-model='dueDate'>
-       </v-date-picker>  
+        <v-date-picker :formats="formats" mode='single' v-model='dueDate'>
+        </v-date-picker>  
 
         <input type='text' placeholder='pick a date...' v-model='dueDate' >
         <input type='text' placeholder='Task title' v-model='title' >
         <input type='text' placeholder='Task description' v-model='description' >
         <input type="text" placeholder="Task category" v-model="category" v-validate="'min:3'">
 
-        <button class="btn waves-effect waves-light" type="submit">Create Task</button>
+        <button class="btn waves-effect waves-light" v-on: submit='addTask'>Create Task</button>
 
         <transition name="alert-in" enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
           <p class="alert" v-if="errors.has('task')">{{errors.first('task') }}</p>
@@ -29,13 +33,19 @@
       <ul>
           <li v-for="(task, index) in tasks" :key='index'> 
 
-                <input type="checkbox" id="checkbox" v-model="checked">
-
-                <p>Title:{{ task.title }}<br></p> <p>Description:{{task.description}}<br></p><p>Category:{{task.category}}<br></p><p>Due Date:{{task.dueDate}}</p>
+                <p>Title: {{ task.title }}<br></p>
+                <p>Description: {{task.description}}<br></p>
+                <p>Category: {{task.category}}<br></p>
+                <p>Due Date: {{task.dueDate}}</p>
             
-                <div class='card-footer'>
+                <div class='footer-left'>
                   <i class='fa fa-trash' v-on:click="remove(index)"></i>
-                </div>
+                    </div>
+
+                    <!-- <div class='footer-left'>
+                  <button class="btn waves-effect waves-light btn-small" v-on:click='counter +=1'>Task Done</button>
+                  <p>task has been done {{ counter }} times.</p>
+                  </div> -->
 
           </li>
       </ul>
@@ -59,10 +69,15 @@ export default {
 
     message: null,
 
+    tasks: [],
+    search: '',
+
     title: "",
     description: "",
     category: "",
     dueDate: "",
+
+    //  counter: 0,
 
      taskDeadline: new Date(),
 
@@ -91,7 +106,6 @@ export default {
         },
       ],
 
-    tasks: []
     }
   },
 
@@ -102,21 +116,11 @@ export default {
       })
     },
 
-    // formPost(){
-    //   store.writeTask(this.message);
-    // },
-
-    selectCategory(category) {
-      return this.selectedCategory.includes(category)
-    },
-
     addTask() {
-          
           this.tasks.push({title: this.title,
           description: this.description, 
           category: this.category, 
           dueDate: this.dueDate})
-
 
           this.title = "";
           this.description = "";
@@ -124,21 +128,38 @@ export default {
           this.dueDate = ""
         },
 
+        markComplete(index)
+        {
+          return this.tasks[index].status = true;
+},
+
     remove(id) {
       this.tasks.splice(id,1);
       }
     },
         
-    computed: 
-    {
+    computed: {
       completedTasks: function () {
         return this.tasks.filter(task => task.completed)
       },
        incompleteTasks: function () {
         return this.tasks.filter(task => !task.completed)
     }
-  }
+  },
+
+      filteredCategories: function() {
+        return this.tasks.filter((task) => {
+          return task.category.match(this.search)
+        })
+      },
+
+    sortTasks: function() {
+      return this.tasks.sort((a, b) => {
+        a[this.title] < b[this.description]
+      })
+    }
 }
+
 </script>
 
 <style>
@@ -165,12 +186,9 @@ ul {
 }
 
 ul li {
-  padding: 20px;
   font-size: 1em;
   border-style: solid;
   border-color: #ee6e73;
-  border-radius: 25px;
-  margin-bottom: 2px;
   color: gray;
 }
 
@@ -221,22 +239,29 @@ input {
   }
 }
 
-.card-footer {
-    align-items: center;
-    display: flex;
-    flex-basis: 0;
-    flex-grow: 1;
-    flex-shrink: 0;
-    justify-content: center;
-    padding: .75rem;
+.footer-left {
+  border-style: solid;
+  height: 50%;
+  width: 100%;
+  color: teal;
+  text-align: center;
 }
+
+/* .footer-right {
+  border-radius: 15px 50px 30px 5px;
+  border-style: solid;
+  width: 50%;
+  padding-left: 50%;
+  color: teal;
+  text-align: center;
+} */
 
 .icon {
     align-items: center;
     display: inline-flex;
     justify-content: center;
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 2.5rem;
+    width: 2.5rem;
 }
 
 i {
@@ -245,10 +270,4 @@ i {
   text-align: center;
   cursor: pointer;
 }
-
-#checkbox input {
-  display: inline-block;
-  margin-right: 10px;
-}
-
 </style>
