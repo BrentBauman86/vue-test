@@ -2,9 +2,9 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Skills from '@/components/Skills';
 import Login from '@/components/Login';
+import View from '@/components/View';
 import Signup from '@/components/Signup'
 import firebase from 'firebase'
-import View from '@/components/View'
 
 Vue.use(Router);
 
@@ -23,8 +23,8 @@ const router = new Router({
     component: Signup },
 
     { path: '/view',
-      name: 'view',
-      component: View },
+    name: 'view',
+    component: View },
 
     { path: '/',
     name: 'skills',

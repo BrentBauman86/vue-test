@@ -33,31 +33,31 @@ let app = '';
   };
   firebase.initializeApp(config);
 
-  export const store = {
-    tasksInFeed: null,
-    currentUser: null,
-    writeTask: (message) => console.log(message)
-  };
+  // export const store = {
+  //   tasksInFeed: null,
+  //   currentUser: null,
+  //   writeTask: (message) => console.log(message)
+  // };
 
-  const tasksCollection = firebase.firestore()
-  .collection('tasks');
+  // const tasksCollection = firebase.firestore()
+  // .collection('tasks');
 
-  tasksCollection
-  .onSnapshot((tasksRef) => {
-    const tasks = [];
-    tasksRef.forEach((doc) => {
-      const task = doc.data();
-      task.id = doc.id;
-      tasks.push(task);
-    });
-    store.tasksInFeed = tasks;
-  });
+  // tasksCollection
+  // .onSnapshot((tasksRef) => {
+  //   const tasks = [];
+  //   tasksRef.forEach((doc) => {
+  //     const task = doc.data();
+  //     task.id = doc.id;
+  //     tasks.push(task);
+  //   });
+  //   store.tasksInFeed = tasks;
+  // });
 
-  writeTask: (message) => tasksCollection.add({
-    createdOn: new Date(),
-    author: store.currentUser,
-    message
-  })
+  // writeTask: (message) => tasksCollection.add({
+  //   createdOn: new Date(),
+  //   author: store.currentUser,
+  //   message
+  // })
 
   firebase.auth().onAuthStateChanged(() => {
     if (!app) {

@@ -36,8 +36,6 @@
     </script>
 
     <style scoped src="materialize-css/dist/css/materialize.min.css">
-    .login {
-    }
 
     input {
         margin: 10px 0;

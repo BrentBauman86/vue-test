@@ -1,17 +1,18 @@
 <template>
   <div id="app">
-    <div class="hello">
       <div class='nav'>
       <nav>
-        <router-link to="/view">View Task</router-link>
+           <div class="pad">
+          <button class="btn waves-effect waves-light">
+            <router-link to="/view">Tasks</router-link>
+          </button>
+          </div>
         </nav>
-        </div>
-
+      </div>
     <nav>
       <h3>ToDo.Vue</h3>
     </nav>
       <router-view />
-  </div>
   </div>
 </template>
 
@@ -21,7 +22,7 @@ import Skills from './components/Skills.vue'
 export default {
   name: 'app',
   components: {
-    Skills 
+    Skills
   }
 }
 </script>
@@ -66,4 +67,7 @@ h3 {
   text-align: center;
 }
 
+.pad {
+        padding-left: 10px;
+    }
 </style>

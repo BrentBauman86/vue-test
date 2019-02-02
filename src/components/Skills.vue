@@ -10,10 +10,10 @@
         <v-date-picker
       :formats="formats"
          mode='single'
-        v-model='taskDeadline'>
+        v-model='dueDate'>
        </v-date-picker>  
 
-        <input type='text' placeholder='pick a date...' v-model='taskDeadline' >
+        <input type='text' placeholder='pick a date...' v-model='dueDate' >
         <input type='text' placeholder='Task title' v-model='title' >
         <input type='text' placeholder='Task description' v-model='description' >
         <input type="text" placeholder="Task category" v-model="category" v-validate="'min:3'">
@@ -31,7 +31,7 @@
 
                 <input type="checkbox" id="checkbox" v-model="checked">
 
-                <p>Title:{{ task.title }}<br></p> <p>Description:{{task.description}}<br></p><p>Category:{{task.category}}<br></p><p>Due Date:{{task.taskDeadline}}</p>
+                <p>Title:{{ task.title }}<br></p> <p>Description:{{task.description}}<br></p><p>Category:{{task.category}}<br></p><p>Due Date:{{task.dueDate}}</p>
             
                 <div class='card-footer'>
                   <i class='fa fa-trash' v-on:click="remove(index)"></i>
@@ -62,11 +62,11 @@ export default {
     title: "",
     description: "",
     category: "",
-    taskDeadline: "",
+    dueDate: "",
 
      taskDeadline: new Date(),
 
-     taskDeadline: null,
+     dueDate: null,
       formats: {
         title: 'MMMM YYYY',
         weekdays: 'W',
@@ -115,13 +115,13 @@ export default {
           this.tasks.push({title: this.title,
           description: this.description, 
           category: this.category, 
-          taskDeadline: this.taskDeadline})
+          dueDate: this.dueDate})
 
 
           this.title = "";
           this.description = "";
           this.category = "";
-          this.taskDeadline = ""
+          this.dueDate = ""
         },
 
     remove(id) {
