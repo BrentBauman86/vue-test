@@ -8,10 +8,10 @@
         <p>Fill out your task list!</p>
 
         <v-date-picker
-        :formats="formats"
-          mode='single'
-          v-model='taskDeadline'>
-        </v-date-picker> 
+      :formats="formats"
+         mode='single'
+        v-model='taskDeadline'>
+       </v-date-picker>  
 
         <input type='text' placeholder='pick a date...' v-model='taskDeadline' >
         <input type='text' placeholder='Task title' v-model='title' >
@@ -37,11 +37,6 @@
                   <i class='fa fa-trash' v-on:click="remove(index)"></i>
                 </div>
 
-<input type="radio" value="One" v-model="picked">
-<input type="radio" value="Two" v-model="picked">
-<span>Picked: {{ picked }}</span>
-
-
           </li>
       </ul>
         <p>Above are all the things you need to do.</p>
@@ -53,7 +48,7 @@
 
 <script>
 import firebase from 'firebase';
-
+// import format from 'date-fns/format'
 // import {store} from './skills';
 
 export default {
@@ -62,17 +57,14 @@ export default {
  data() {
    return {
 
-    picked: '',
-
     message: null,
 
-    checkbox: "",
     title: "",
     description: "",
     category: "",
     taskDeadline: "",
 
-    //  taskDeadline: new Date(),
+     taskDeadline: new Date(),
 
      taskDeadline: null,
       formats: {
@@ -136,8 +128,9 @@ export default {
       this.tasks.splice(id,1);
       }
     },
-
-    computed: {
+        
+    computed: 
+    {
       completedTasks: function () {
         return this.tasks.filter(task => task.completed)
       },
