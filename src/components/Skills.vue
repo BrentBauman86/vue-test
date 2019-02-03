@@ -30,25 +30,25 @@
       </form>
       </div>
 
-      <ul>
-          <li v-for="(task, index) in tasks" :key='index'> 
+    <ul>
+        <li v-for="(task, index) in tasks" :key='index'> 
 
-                <p>Title: {{ task.title }}<br></p>
-                <p>Description: {{task.description}}<br></p>
-                <p>Category: {{task.category}}<br></p>
-                <p>Due Date: {{task.dueDate}}</p>
-            
-                <div class='footer-left'>
-                  <i class='fa fa-trash' v-on:click="remove(index)"></i>
-                    </div>
+          <p>Title: {{ task.title }}<br></p>
+          <p>Description: {{task.description}}<br></p>
+          <p>Category: {{task.category}}<br></p>
+          <p>Due Date: {{task.dueDate}}</p>
+      
+          <div class='footer'>
+            <i class='fa fa-trash' v-on:click="remove(index)"></i>
+            </div>
 
-                    <!-- <div class='footer-left'>
-                  <button class="btn waves-effect waves-light btn-small" v-on:click='counter +=1'>Task Done</button>
-                  <p>task has been done {{ counter }} times.</p>
-                  </div> -->
-
-          </li>
-      </ul>
+            <transition name="fade" mode="in-out">
+              <button class='btn waves-effect waves-light btn-small' v-on:click="markComplete">
+                {{ markComplete ? 'Not Complete' : 'Complete' }}
+              </button>
+            </transition>
+        </li>
+    </ul>
         <p>Above are all the things you need to do.</p>
       </div>
     <button class="btn waves-effect waves-light" @click='logout'>Logout</button>
@@ -59,7 +59,6 @@
 <script>
 import firebase from 'firebase';
 // import format from 'date-fns/format'
-// import {store} from './skills';
 
 export default {
   name: 'Skills',
@@ -68,7 +67,6 @@ export default {
    return {
 
     message: null,
-
     tasks: [],
     search: '',
 
@@ -77,37 +75,34 @@ export default {
     category: "",
     dueDate: "",
 
-    //  counter: 0,
+    taskDeadline: new Date(),
 
-     taskDeadline: new Date(),
+    dueDate: null,
+    formats: {
+      title: 'MMMM YYYY',
+      weekdays: 'W',
+      navMonths: 'MMM',
+      input: ['L', 'YYYY-MM-DD', 'YYYY/MM/DD'],
+      dayPopover: 'L', 
+    },
 
-     dueDate: null,
-      formats: {
-        title: 'MMMM YYYY',
-        weekdays: 'W',
-        navMonths: 'MMM',
-        input: ['L', 'YYYY-MM-DD', 'YYYY/MM/DD'],
-        dayPopover: 'L', 
-      },
-
-      attrs: [
-        {
-          key: 'today',
-          dates: new Date(2019, 0, 31),
-          highlight: {
-            backgroundColor: '#ff8080',
-          },
-          contentStyle: {
-            color: '#fafafa',
-          },
-          popover: {
-            label: 'You just hovered over today\'s date!',
-          }
+    attrs: [
+      {
+        key: 'today',
+        dates: new Date(2019, 0, 31),
+        highlight: {
+          backgroundColor: '#ff8080',
         },
-      ],
-
-    }
-  },
+        contentStyle: {
+          color: '#fafafa',
+        },
+        popover: {
+          label: 'You just hovered over today\'s date!',
+        }
+      },
+    ],
+  }
+},
 
   methods: {
     logout: function() {
@@ -128,37 +123,37 @@ export default {
           this.dueDate = ""
         },
 
-        markComplete(index)
-        {
-          return this.tasks[index].status = true;
-},
+    markComplete() {
+      return true;
+    },
 
     remove(id) {
       this.tasks.splice(id,1);
       }
     },
         
-    computed: {
-      completedTasks: function () {
-        return this.tasks.filter(task => task.completed)
-      },
-       incompleteTasks: function () {
-        return this.tasks.filter(task => !task.completed)
+  computed: {
+    completedTasks: function () {
+      return this.tasks.filter(task => task.completed)
+    },
+    incompleteTasks: function () {
+    return this.tasks.filter(task => !task.completed)
     }
   },
 
-      filteredCategories: function() {
-        return this.tasks.filter((task) => {
-          return task.category.match(this.search)
-        })
-      },
+    
+    filteredCategories: function() {
+      return this.tasks.filter((task) => {
+        return task.category.match(this.search)
+      })
+    },
 
     sortTasks: function() {
       return this.tasks.sort((a, b) => {
         a[this.title] < b[this.description]
       })
     }
-}
+  }
 
 </script>
 
@@ -227,6 +222,10 @@ input {
   animation: bounce-in .5s reverse;
 }
 
+.delete {
+  animation: bounce-out;
+}
+
 @keyframes bounce-in {
   0% {
     transform: scale(0);
@@ -239,22 +238,13 @@ input {
   }
 }
 
-.footer-left {
+.footer {
   border-style: solid;
   height: 50%;
   width: 100%;
   color: teal;
   text-align: center;
 }
-
-/* .footer-right {
-  border-radius: 15px 50px 30px 5px;
-  border-style: solid;
-  width: 50%;
-  padding-left: 50%;
-  color: teal;
-  text-align: center;
-} */
 
 .icon {
     align-items: center;
