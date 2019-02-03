@@ -48,39 +48,35 @@
         <div class='col s12 16'>
           <div class='card'>
               <div class='card-content'>
+                <a href="#" class="btn-floating pink pulse">
+                  <i class="material-icons">favorite</i>
+                  </a>
                 <span class='card-title'>title: {{task.title}} </span>
                 <span class='card-title'>Description: {{task.description}}</span>
                 <span class='card-title'> Category: {{task.category}}</span>
                 <span class='card-title'>Due Date: {{task.dueDate}}</span>
 
-              <!-- <div class="card-action"> -->
 
-                        <!-- <router-link to='/login'>view task</router-link> -->
-                  <!-- <button class='btn waves-effect waves-light btn-small' v-on:click="remove">delete</button> -->
-                <!-- </div> -->
+
+
+              <div class="card-action">
+
+              <button class='btn waves-effect waves-light btn-small' >Complete</button>
+              <button class='btn waves-effect waves-light btn-small' v-on:click="remove(index)">Delete</button>
+
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-
-
-    
-            <transition name="fade" mode="in-out">
+            <!-- <transition name="fade" mode="in-out">
               <button class='btn waves-effect waves-light btn-small' v-on:click="markComplete">
                 {{ markComplete ? 'Not Complete' : 'Complete' }}
               </button>
-            </transition>
-
-            <b-button :pressed.sync="comleted" variant="primary">Complete Task</b-button>
-              <p>Task Complete: <strong>{{ completed }}</strong></p>
-
-              <div class='span'>
-                <div class='footer-right'>
-                  <i class='fa fa-trash' v-on:click="remove(index)"></i>
-
-                </div>
-              </div>
+            </transition> -->
+          
+            <!-- <b-button :pressed.sync="comleted" variant="primary">Complete Task</b-button>
+                  <p>Task Complete: <strong>{{ completed }}</strong></p> -->
         </li>
     </ul>
 
