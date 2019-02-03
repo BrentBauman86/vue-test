@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Skills from '@/components/Skills';
+import Tasks from '@/components/Tasks';
 import Login from '@/components/Login';
 import View from '@/components/View';
 import Signup from '@/components/Signup'
@@ -27,8 +27,8 @@ const router = new Router({
     component: View },
 
     { path: '/',
-    name: 'skills',
-    component: Skills,meta: {
+    name: 'tasks',
+    component: Tasks,meta: {
     requiresAuth: true
         }
     }

@@ -1,12 +1,20 @@
 <template>
+
   <div class="hello">
+    <!-- <div class='nav'>
+      <nav>
+           <div class="pad">
+          <button class="btn waves-effect waves-light">
+          <router-link to="/view">Tasks</router-link>
+          </button>
+          </div>
+        </nav>
+      </div> -->
     <div class="holder">
       <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
-       
-
-
+    
       <input type="text" v-model='search' placeholder='search categories'/>
-        <div v-for='(task, index) in filteredCategories' :key='index'>
+        <div v-for="(task, index) in filteredCategories" :key='index'>
           </div>
 
       <div class="border">
@@ -16,6 +24,30 @@
 
         <v-date-picker :formats="formats" mode='single' v-model='dueDate'>
         </v-date-picker>  
+
+
+      <!-- <table class="table">
+        <thread>
+          <th></th>
+          <th></th>
+          <th></th>
+            <th></th>
+              </thread>
+
+          <tbody>
+            <tr v-for='task in tasks'>
+              <td>
+                <td>
+                  <td>
+                    <td>
+                    </tr>
+                    </tbody>
+                    </table>
+                    </div>
+                    </div> -->
+
+
+
 
         <input type='text' placeholder='pick a date...' v-model='dueDate' >
         <input type='text' placeholder='Task title' v-model='title' >
@@ -28,32 +60,38 @@
           <p class="alert" v-if="errors.has('task')">{{errors.first('task') }}</p>
         </transition>
       </form>
-      </div>
+    </div>
 
     <ul>
         <li v-for="(task, index) in tasks" :key='index'> 
 
-          <p>Title: {{ task.title }}<br></p>
+          <p>title: {{task.title}}<br></p>
           <p>Description: {{task.description}}<br></p>
           <p>Category: {{task.category}}<br></p>
           <p>Due Date: {{task.dueDate}}</p>
-      
-          <div class='footer'>
-            <i class='fa fa-trash' v-on:click="remove(index)"></i>
-            </div>
-
+    
             <transition name="fade" mode="in-out">
               <button class='btn waves-effect waves-light btn-small' v-on:click="markComplete">
                 {{ markComplete ? 'Not Complete' : 'Complete' }}
               </button>
             </transition>
+
+            <b-button button class='btn waves-effect waves-light btn-small' :pressed.sync="comleted" variant="primary">Complete Task</b-button>
+              <p>Task Complete: <strong>{{ completed }}</strong></p>
+
+              <div class='span'>
+                <div class='footer-right'>
+                  <i class='fa fa-trash' v-on:click="remove(index)"></i>
+
+                </div>
+              </div>
         </li>
     </ul>
+
         <p>Above are all the things you need to do.</p>
       </div>
-    <button class="btn waves-effect waves-light" @click='logout'>Logout</button>
+   <button class="btn waves-effect waves-light" @click='logout'>Logout</button>
   </div>
-
 </template>
 
 <script>
@@ -61,21 +99,21 @@ import firebase from 'firebase';
 // import format from 'date-fns/format'
 
 export default {
-  name: 'Skills',
+  name: 'tasks',
 
- data() {
+  data() {
    return {
 
-    message: null,
+     completed: false,
+     buttons: [
+       { variant: 'primary', caption: 'complete', state: true },
+     ],
+
+    markComplete: false,
     tasks: [],
     search: '',
 
-    title: "",
-    description: "",
-    category: "",
-    dueDate: "",
-
-    taskDeadline: new Date(),
+    dueDate: new Date(),
 
     dueDate: null,
     formats: {
@@ -123,29 +161,24 @@ export default {
           this.dueDate = ""
         },
 
-    markComplete() {
-      return true;
-    },
-
     remove(id) {
       this.tasks.splice(id,1);
       }
     },
         
   computed: {
-    completedTasks: function () {
-      return this.tasks.filter(task => task.completed)
-    },
-    incompleteTasks: function () {
-    return this.tasks.filter(task => !task.completed)
-    }
-  },
-
-    
     filteredCategories: function() {
       return this.tasks.filter((task) => {
         return task.category.match(this.search)
       })
+    },
+
+    categories: function(name) {
+      return category ? category : 'there'
+    },
+
+    btnStates () {
+      return this.buttons.map(btn => btn.state)
     },
 
     sortTasks: function() {
@@ -154,7 +187,7 @@ export default {
       })
     }
   }
-
+}
 </script>
 
 <style>
@@ -168,6 +201,18 @@ export default {
   padding-right: 30px;
   padding-bottom: 50px;
   padding-left: 30px;
+}
+
+.list-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
+}
+.list-enter, .list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
 }
 
 .holder {
@@ -238,26 +283,20 @@ input {
   }
 }
 
-.footer {
-  border-style: solid;
-  height: 50%;
-  width: 100%;
-  color: teal;
-  text-align: center;
+.footer-right {
+  text-align: right;
 }
 
-.icon {
-    align-items: center;
-    display: inline-flex;
-    justify-content: center;
-    height: 2.5rem;
-    width: 2.5rem;
+.footer-left {
+  text-align: left;
 }
 
 i {
   display: block;
   margin: 0 auto;
-  text-align: center;
+  text-align: left;
   cursor: pointer;
+  height: 3.5rem;
+  width: 3.5rem;
 }
 </style>

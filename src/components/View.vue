@@ -1,5 +1,5 @@
 <template>
-<div id="app">
+    <div class='hello'>
     <p>hello</p>
     </div>
     </template>
@@ -9,6 +9,13 @@
 
     export default {
         name: 'view',
+
+        data() {
+            return {
+                email: '',
+                password: '',
+            };
+        }
     }
     </script>
 
