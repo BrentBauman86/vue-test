@@ -25,50 +25,46 @@
         <v-date-picker :formats="formats" mode='single' v-model='dueDate'>
         </v-date-picker>  
 
-
-      <!-- <table class="table">
-        <thread>
-          <th></th>
-          <th></th>
-          <th></th>
-            <th></th>
-              </thread>
-
-          <tbody>
-            <tr v-for='task in tasks'>
-              <td>
-                <td>
-                  <td>
-                    <td>
-                    </tr>
-                    </tbody>
-                    </table>
-                    </div>
-                    </div> -->
-
-
-
-
         <input type='text' placeholder='pick a date...' v-model='dueDate' >
         <input type='text' placeholder='Task title' v-model='title' >
         <input type='text' placeholder='Task description' v-model='description' >
-        <input type="text" placeholder="Task category" v-model="category" v-validate="'min:3'">
+        <input type="text" placeholder="Task category" v-model="category" v-validate="'min:5'" name='category'>
+        <transition name="alert-in" enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
+          <p class="alert" v-if="errors.has('category')">{{errors.first('category') }}</p>
+        </transition>
 
         <button class="btn waves-effect waves-light" v-on: submit='addTask'>Create Task</button>
 
-        <transition name="alert-in" enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
-          <p class="alert" v-if="errors.has('task')">{{errors.first('task') }}</p>
-        </transition>
       </form>
     </div>
 
     <ul>
         <li v-for="(task, index) in tasks" :key='index'> 
 
-          <p>title: {{task.title}}<br></p>
-          <p>Description: {{task.description}}<br></p>
-          <p>Category: {{task.category}}<br></p>
-          <p>Due Date: {{task.dueDate}}</p>
+
+
+
+      <div class="row">
+        <div class='col s12 16'>
+          <div class='card'>
+              <div class='card-content'>
+                <span class='card-title'>title: {{task.title}} </span>
+                <span class='card-title'>Description: {{task.description}}</span>
+                <span class='card-title'> Category: {{task.category}}</span>
+                <span class='card-title'>Due Date: {{task.dueDate}}</span>
+
+              <!-- <div class="card-action"> -->
+
+                        <!-- <router-link to='/login'>view task</router-link> -->
+                  <!-- <button class='btn waves-effect waves-light btn-small' v-on:click="remove">delete</button> -->
+                <!-- </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
     
             <transition name="fade" mode="in-out">
               <button class='btn waves-effect waves-light btn-small' v-on:click="markComplete">
@@ -76,7 +72,7 @@
               </button>
             </transition>
 
-            <b-button button class='btn waves-effect waves-light btn-small' :pressed.sync="comleted" variant="primary">Complete Task</b-button>
+            <b-button :pressed.sync="comleted" variant="primary">Complete Task</b-button>
               <p>Task Complete: <strong>{{ completed }}</strong></p>
 
               <div class='span'>
@@ -150,16 +146,21 @@ export default {
     },
 
     addTask() {
-          this.tasks.push({title: this.title,
-          description: this.description, 
-          category: this.category, 
-          dueDate: this.dueDate})
-
-          this.title = "";
-          this.description = "";
-          this.category = "";
-          this.dueDate = ""
-        },
+          this.$validator.validateAll().then((result) => {
+            if (result) {
+              this.tasks.push({title: this.title,
+              description: this.description, 
+              category: this.category, 
+              dueDate: this.dueDate})
+              this.title = "";
+              this.description = "";
+              this.category = "";
+              this.dueDate = ""
+          } else {
+            coonsole.log('Not Valid');
+          }
+        })
+      },
 
     remove(id) {
       this.tasks.splice(id,1);

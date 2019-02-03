@@ -7,7 +7,12 @@ import VCalendar from 'v-calendar';
 import 'v-calendar/lib/v-calendar.min.css';
 import 'materialize-css/dist/css/materialize.min.css'
 import 'firebase/firestore';
+// import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap-vue/dist/bootstrap-vue.css'
+// import BootstrapVue from 'bootstrap-vue';
 
+
+// Vue.use(BootstrapVue);
 Vue.use(VeeValidate);
 Vue.use(VCalendar, {
   formats: {
