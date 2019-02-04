@@ -46,24 +46,19 @@
 
       <div class="row">
         <div class='col s12 16'>
-          <div class='card'>
+           <div class='card'>
               <div class='card-content'>
-                <a href="#" class="btn-floating pink pulse">
-                  <i class="material-icons">favorite</i>
+                <a href="#" class="btn-floating blue pulse">
+                  <i class="material-icons">assignment</i>
                   </a>
                 <span class='card-title'>title: {{task.title}} </span>
                 <span class='card-title'>Description: {{task.description}}</span>
                 <span class='card-title'> Category: {{task.category}}</span>
                 <span class='card-title'>Due Date: {{task.dueDate}}</span>
 
-
-
-
-              <div class="card-action">
-
-              <button class='btn waves-effect waves-light btn-small' >Complete</button>
-              <button class='btn waves-effect waves-light btn-small' v-on:click="remove(index)">Delete</button>
-
+                      <div class="card-action">
+                    <button class='btn waves-effect waves-light btn-small' >Complete</button>
+                  <button class='btn waves-effect waves-light btn-small' v-on:click="remove(index)">Delete</button>
                 </div>
               </div>
             </div>
@@ -163,27 +158,27 @@ export default {
       }
     },
         
-  computed: {
-    filteredCategories: function() {
-      return this.tasks.filter((task) => {
-        return task.category.match(this.search)
-      })
-    },
+  // computed: {
+  //   filteredCategories: function() {
+  //     return this.tasks.filter((task) => {
+  //       return task.category.match(this.search)
+  //     })
+  //   },
 
-    categories: function(name) {
-      return category ? category : 'there'
-    },
+  //   categories: function(name) {
+  //     return category ? category : 'there'
+  //   },
 
-    btnStates () {
-      return this.buttons.map(btn => btn.state)
-    },
+  //   btnStates () {
+  //     return this.buttons.map(btn => btn.state)
+  //   },
 
-    sortTasks: function() {
-      return this.tasks.sort((a, b) => {
-        a[this.title] < b[this.description]
-      })
-    }
-  }
+  //   sortTasks: function() {
+  //     return this.tasks.sort((a, b) => {
+  //       a[this.title] < b[this.description]
+  //     })
+  //   }
+  // }
 }
 </script>
 
