@@ -57,13 +57,27 @@
                 <span class='card-title'>Due Date: {{task.dueDate}}</span>
 
                       <div class="card-action">
-                    <button class='btn waves-effect waves-light btn-small' >Complete</button>
+                    <button class='btn waves-effect waves-dark btn-small' >Complete</button>
                   <button class='btn waves-effect waves-light btn-small' v-on:click="remove(index)">Delete</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+
+
+<li v-for="(task, index) in tasks">
+    {{task.description}}
+    <button @click="markComplete(index)">Mark Task Complete</button>
+</li>
+
+
+
+
+
+
+
             <!-- <transition name="fade" mode="in-out">
               <button class='btn waves-effect waves-light btn-small' v-on:click="markComplete">
                 {{ markComplete ? 'Not Complete' : 'Complete' }}
@@ -114,7 +128,7 @@ export default {
     attrs: [
       {
         key: 'today',
-        dates: new Date(2019, 0, 31),
+        dates: new Date(),
         highlight: {
           backgroundColor: '#ff8080',
         },
@@ -135,6 +149,14 @@ export default {
         this.$router.replace('login')
       })
     },
+
+  markComplete(idx) {
+        this.tasks[idx].completed = true;
+    },
+
+
+
+
 
     addTask() {
           this.$validator.validateAll().then((result) => {
